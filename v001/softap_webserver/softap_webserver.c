@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <sys/reboot.h>
 
 #define PORT 8080
 #define BUFFER_SIZE 4096
@@ -196,6 +197,7 @@ void handle_post_request(int client_socket, char *buffer) {
         }
 
         if (ssid != NULL && password != NULL) {
+#ifdef _NMCLI_RESCAN            
             // Check if scanning is allowed and perform a scan if possible
             int scan_result = system("nmcli dev wifi rescan");
             if (scan_result != 0) {
@@ -225,6 +227,9 @@ void handle_post_request(int client_socket, char *buffer) {
                 send(client_socket, error_response, strlen(error_response), 0);
                 printf("Failed to apply Wi-Fi configuration.\n");
             }
+#else
+reboot(RB_AUTOBOOT);
+#endif
         } else {
             // Missing ssid or password in JSON data
             send(client_socket, error_response, strlen(error_response), 0);
