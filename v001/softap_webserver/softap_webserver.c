@@ -61,10 +61,10 @@ int start_station_mode(const char *ssid, const char *password) {
     char command[BUFFER_SIZE];
     int scan_result;
     
-    // system("sudo nmcli radio wifi off");
-    // sleep(1);
-    // system("sudo nmcli radio wifi on");
-    // // sleep(3);
+    system("sudo nmcli radio wifi off");
+    sleep(1);
+    system("sudo nmcli radio wifi on");
+    sleep(3);
     // // scan_result = system("nmcli dev wifi rescan");
     // // if (scan_result != 0) {
     // //     printf("Failed to resan\n");
