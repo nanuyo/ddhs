@@ -64,13 +64,13 @@ int start_station_mode(const char *ssid, const char *password) {
     system("sudo nmcli radio wifi off");
     sleep(1);
     system("sudo nmcli radio wifi on");
-    sleep(3);
-    scan_result = system("nmcli dev wifi rescan");
-    if (scan_result != 0) {
-        printf("Failed to resan\n");
-    } else {
-        printf("Succeeded to rescan\n");
-    }
+    // sleep(3);
+    // scan_result = system("nmcli dev wifi rescan");
+    // if (scan_result != 0) {
+    //     printf("Failed to resan\n");
+    // } else {
+    //     printf("Succeeded to rescan\n");
+    // }
     sleep(3);
     // Connect to the specified WiFi network
     snprintf(command, sizeof(command), "nmcli device wifi connect \"%s\" password \"%s\"", ssid, password);
