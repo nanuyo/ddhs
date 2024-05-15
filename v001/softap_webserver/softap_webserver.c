@@ -9,6 +9,11 @@
 #define PORT 8080
 #define BUFFER_SIZE 4096
 
+// Start SoftAP mode
+const char *ap_ssid = "MySoftAP";
+const char *ap_password = "mypassword";
+const char *ap_ip_address = "192.168.1.1";
+
 void serve_html(int client_socket);
 void handle_post_request(int client_socket, char *buffer);
 
@@ -102,13 +107,99 @@ int start_station_mode(const char *ssid, const char *password)
     return scan_result;
 }
 
+void serve_html(int client_socket)
+{
+    FILE *html_file = fopen("index.html", "r");
+    if (html_file == NULL)
+    {
+        perror("Error opening HTML file");
+        exit(EXIT_FAILURE);
+    }
+
+    char line[BUFFER_SIZE];
+
+    // Send the HTTP response header
+    const char *header = "HTTP/1.1 200 OK\r\n"
+                         "Content-Type: text/html\r\n\r\n";
+    send(client_socket, header, strlen(header), 0);
+
+    // Send the contents of the HTML file
+    while (fgets(line, sizeof(line), html_file) != NULL)
+    {
+        send(client_socket, line, strlen(line), 0);
+    }
+
+    fclose(html_file);
+}
+
+void handle_post_request(int client_socket, char *buffer)
+{
+    char *success_response = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Wi-Fi configuration saved successfully!</h1></body></html>\n";
+    char *error_response = "HTTP/1.1 400 Bad Request\nContent-Type: text/html\n\n<html><body><h1>Error: Unable to save Wi-Fi configuration!</h1></body></html>\n";
+
+    // Extract JSON data from the request body
+    char *json_start = strstr(buffer, "\r\n\r\n");
+    if (json_start != NULL)
+    {
+        json_start += 4; // Skip past the "\r\n\r\n" to get to the body
+
+        printf("Received JSON data:\n%s\n", json_start);
+
+        char *ssid = NULL;
+        char *password = NULL;
+
+        // Extract keys and values from JSON data
+        char *token = strtok(json_start, ",{}\":");
+        while (token != NULL)
+        {
+            if (strcmp(token, "ssid") == 0)
+            {
+                token = strtok(NULL, ",{}\":");
+                ssid = strdup(token);
+            }
+            else if (strcmp(token, "password") == 0)
+            {
+                token = strtok(NULL, ",{}\":");
+                password = strdup(token);
+            }
+            else
+            {
+                token = strtok(NULL, ",{}\":");
+            }
+        }
+
+        if (ssid != NULL && password != NULL)
+        {
+            stop_softap_mode();
+            if (start_station_mode(ssid, password) == 0)
+            {
+                free(ssid);
+                free(password);
+                exit(EXIT_FAILURE);
+            }
+            else
+            {
+                free(ssid);
+                free(password);
+            }
+        }
+        else
+        {
+            // Missing ssid or password in JSON data
+            send(client_socket, error_response, strlen(error_response), 0);
+            printf("Missing ssid or password in JSON data.\n");
+        }
+    }
+    else
+    {
+        // Invalid request format
+        send(client_socket, error_response, strlen(error_response), 0);
+        printf("Invalid request format.\n");
+    }
+}
+
 int main()
 {
-    // Start SoftAP mode
-    const char *ap_ssid = "MySoftAP";
-    const char *ap_password = "mypassword";
-    const char *ap_ip_address = "192.168.1.1";
-
     int server_fd, new_socket;
     struct sockaddr_in address;
     int opt = 1;
@@ -217,95 +308,4 @@ int main()
     close(server_fd);
 
     return 0;
-}
-
-void serve_html(int client_socket)
-{
-    FILE *html_file = fopen("index.html", "r");
-    if (html_file == NULL)
-    {
-        perror("Error opening HTML file");
-        exit(EXIT_FAILURE);
-    }
-
-    char line[BUFFER_SIZE];
-
-    // Send the HTTP response header
-    const char *header = "HTTP/1.1 200 OK\r\n"
-                         "Content-Type: text/html\r\n\r\n";
-    send(client_socket, header, strlen(header), 0);
-
-    // Send the contents of the HTML file
-    while (fgets(line, sizeof(line), html_file) != NULL)
-    {
-        send(client_socket, line, strlen(line), 0);
-    }
-
-    fclose(html_file);
-}
-
-void handle_post_request(int client_socket, char *buffer)
-{
-    char *success_response = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n<html><body><h1>Wi-Fi configuration saved successfully!</h1></body></html>\n";
-    char *error_response = "HTTP/1.1 400 Bad Request\nContent-Type: text/html\n\n<html><body><h1>Error: Unable to save Wi-Fi configuration!</h1></body></html>\n";
-
-    // Extract JSON data from the request body
-    char *json_start = strstr(buffer, "\r\n\r\n");
-    if (json_start != NULL)
-    {
-        json_start += 4; // Skip past the "\r\n\r\n" to get to the body
-
-        printf("Received JSON data:\n%s\n", json_start);
-
-        char *ssid = NULL;
-        char *password = NULL;
-
-        // Extract keys and values from JSON data
-        char *token = strtok(json_start, ",{}\":");
-        while (token != NULL)
-        {
-            if (strcmp(token, "ssid") == 0)
-            {
-                token = strtok(NULL, ",{}\":");
-                ssid = strdup(token);
-            }
-            else if (strcmp(token, "password") == 0)
-            {
-                token = strtok(NULL, ",{}\":");
-                password = strdup(token);
-            }
-            else
-            {
-                token = strtok(NULL, ",{}\":");
-            }
-        }
-
-        if (ssid != NULL && password != NULL)
-        {
-            stop_softap_mode();
-            if (start_station_mode(ssid, password) == 0)
-            {
-                free(ssid);
-                free(password);
-                exit(EXIT_FAILURE);
-            }
-            else
-            {
-                free(ssid);
-                free(password);
-            }
-        }
-        else
-        {
-            // Missing ssid or password in JSON data
-            send(client_socket, error_response, strlen(error_response), 0);
-            printf("Missing ssid or password in JSON data.\n");
-        }
-    }
-    else
-    {
-        // Invalid request format
-        send(client_socket, error_response, strlen(error_response), 0);
-        printf("Invalid request format.\n");
-    }
 }
