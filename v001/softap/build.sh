@@ -1,1 +1,1 @@
-gcc -o softap_firefly3288 softap_firefly3288.c
+gcc -o softap_firefly3288.run softap_firefly3288.c
