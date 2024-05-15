@@ -69,10 +69,10 @@ int start_station_mode(const char *ssid, const char *password) {
     sleep(3);
     // Connect to the specified WiFi network
     snprintf(command, sizeof(command), "nmcli device wifi connect \"%s\" password \"%s\"", ssid, password);
-    int result = system(command);
-    if (result != 0) {
+    scan_result = system(command);
+    if (scan_result != 0) {
         fprintf(stderr, "Failed to connect to WiFi network\n");
-        //exit(EXIT_FAILURE);
+        printf("Failed to Connect to WiFi network with SSID: %s\n", ssid);
     } else {
         printf("Connected to WiFi network with SSID: %s\n", ssid);
     }
