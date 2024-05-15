@@ -228,7 +228,14 @@ void handle_post_request(int client_socket, char *buffer) {
                 printf("Failed to apply Wi-Fi configuration.\n");
             }
 #else
-reboot(RB_AUTOBOOT);
+ // Use nmcli to configure Wi-Fi
+            char command[BUFFER_SIZE];
+            snprintf(command, sizeof(command), "nmcli dev wifi connect \"%s\" password \"%s\"", ssid, password);
+            int result = system(command);
+
+            free(ssid);
+            free(password);
+            reboot(RB_AUTOBOOT);
 #endif
         } else {
             // Missing ssid or password in JSON data
