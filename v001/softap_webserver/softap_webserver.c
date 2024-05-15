@@ -195,9 +195,10 @@ void handle_post_request(int client_socket, char *buffer) {
                 token = strtok(NULL, ",{}\":");
             }
         }
-
+int runrun = 1;
         if (ssid != NULL && password != NULL) {
-
+while(runrun)
+{
             // Check if scanning is allowed and perform a scan if possible
             int scan_result = system("nmcli dev wifi rescan");
             // if (scan_result != 0) {
@@ -209,26 +210,32 @@ void handle_post_request(int client_socket, char *buffer) {
             //     free(password);
             //     return;
             // }
+            int scan_result = system("nmcli dev wifi list");
 
             // Use nmcli to configure Wi-Fi
             char command[BUFFER_SIZE];
             snprintf(command, sizeof(command), "nmcli dev wifi connect \"%s\" password \"%s\"", ssid, password);
             int result = system(command);
 
-            free(ssid);
-            free(password);
-
+            
             if (result == 0) {
                 // Send success response
                 send(client_socket, success_response, strlen(success_response), 0);
+                free(ssid);
+                free(password);
+                runrun = 0;
+
                 printf("Wi-Fi configuration saved and applied successfully.\n");
             } else {
                 // Failed to configure Wi-Fi
                 send(client_socket, error_response, strlen(error_response), 0);
                 printf("Failed to apply Wi-Fi configuration.\n");
+                sleep(3);
+                
             }
-            sleep(3);
-            reboot(RB_AUTOBOOT);
+}
+            
+            //reboot(RB_AUTOBOOT);
         } else {
             // Missing ssid or password in JSON data
             send(client_socket, error_response, strlen(error_response), 0);
