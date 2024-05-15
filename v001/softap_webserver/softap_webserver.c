@@ -234,63 +234,13 @@ void handle_post_request(int client_socket, char *buffer) {
                 token = strtok(NULL, ",{}\":");
             }
         }
-// int runrun = 1;
-// int scan_result;
+
         if (ssid != NULL && password != NULL) {
-            while(1)
-            {
             stop_softap_mode();
-            if(start_station_mode(ssid, password) != 0)
-             continue;
-            else
-             break;
-
-            }
-
-// while(runrun)
-// {
-//             // Check if scanning is allowed and perform a scan if possible
-//             scan_result = system("sudo nmcli radio wifi off");
-//             sleep(1);
-//             scan_result = system("sudo nmcli radio wifi on");
-//             sleep(3);
-//             scan_result = system("nmcli dev wifi rescan");
-//             sleep(3);
-//             // if (scan_result != 0) {
-//             //     // Scanning not allowed, provide an appropriate error message
-//             //     fprintf(stderr, "Scanning not allowed at this time.\n");
-//             //     send(client_socket, error_response, strlen(error_response), 0);
-//             //     printf("Failed to scan for Wi-Fi networks.\n");
-//             //     free(ssid);
-//             //     free(password);
-//             //     return;
-//             // }
-//             scan_result = system("nmcli dev wifi list");
-//             sleep(3);
-//             // Use nmcli to configure Wi-Fi
-//             char command[BUFFER_SIZE];
-//             snprintf(command, sizeof(command), "nmcli dev wifi connect \"%s\" password \"%s\"", ssid, password);
-//             int result = system(command);
-//             sleep(3);
+            start_station_mode(ssid, password);
+            free(ssid);
+            free(password);
             
-//             if (result == 0) {
-//                 // Send success response
-//                 send(client_socket, success_response, strlen(success_response), 0);
-//                 free(ssid);
-//                 free(password);
-//                 runrun = 0;
-
-//                 printf("Wi-Fi configuration saved and applied successfully.\n");
-//             } else {
-//                 // Failed to configure Wi-Fi
-//                 send(client_socket, error_response, strlen(error_response), 0);
-//                 printf("Failed to apply Wi-Fi configuration.\n");
-//                 sleep(3);
-                
-//             }
-// }
-            
-            //reboot(RB_AUTOBOOT);
         } else {
             // Missing ssid or password in JSON data
             send(client_socket, error_response, strlen(error_response), 0);
