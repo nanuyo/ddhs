@@ -196,11 +196,17 @@ void handle_post_request(int client_socket, char *buffer) {
             }
         }
 int runrun = 1;
+int scan_result;
         if (ssid != NULL && password != NULL) {
 while(runrun)
 {
             // Check if scanning is allowed and perform a scan if possible
-            int scan_result = system("nmcli dev wifi rescan");
+            scan_result = system("sudo nmcli radio wifi off);
+            sleep(1);
+            scan_result = system("sudo nmcli radio wifi on);
+            sleep(3);
+            scan_result = system("nmcli dev wifi rescan");
+            sleep(3);
             // if (scan_result != 0) {
             //     // Scanning not allowed, provide an appropriate error message
             //     fprintf(stderr, "Scanning not allowed at this time.\n");
@@ -211,12 +217,12 @@ while(runrun)
             //     return;
             // }
             scan_result = system("nmcli dev wifi list");
-
+            sleep(3);
             // Use nmcli to configure Wi-Fi
             char command[BUFFER_SIZE];
             snprintf(command, sizeof(command), "nmcli dev wifi connect \"%s\" password \"%s\"", ssid, password);
             int result = system(command);
-
+            sleep(3);
             
             if (result == 0) {
                 // Send success response
