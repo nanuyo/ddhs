@@ -210,7 +210,7 @@ while(runrun)
             //     free(password);
             //     return;
             // }
-            int scan_result = system("nmcli dev wifi list");
+            scan_result = system("nmcli dev wifi list");
 
             // Use nmcli to configure Wi-Fi
             char command[BUFFER_SIZE];
