@@ -201,9 +201,9 @@ int scan_result;
 while(runrun)
 {
             // Check if scanning is allowed and perform a scan if possible
-            scan_result = system("sudo nmcli radio wifi off);
+            scan_result = system("sudo nmcli radio wifi off");
             sleep(1);
-            scan_result = system("sudo nmcli radio wifi on);
+            scan_result = system("sudo nmcli radio wifi on");
             sleep(3);
             scan_result = system("nmcli dev wifi rescan");
             sleep(3);
