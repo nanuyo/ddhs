@@ -237,9 +237,17 @@ void handle_post_request(int client_socket, char *buffer) {
 
         if (ssid != NULL && password != NULL) {
             stop_softap_mode();
-            start_station_mode(ssid, password);
-            free(ssid);
-            free(password);
+            if(start_station_mode(ssid, password)==0)
+            {
+                free(ssid);
+                free(password);
+                exit(EXIT_FAILURE);
+            }
+            else
+            {
+                free(ssid);
+                free(password);
+            }
             
         } else {
             // Missing ssid or password in JSON data
