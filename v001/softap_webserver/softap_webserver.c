@@ -93,7 +93,6 @@ int start_station_mode(const char *ssid, const char *password)
     if (scan_result != 0)
     {
         fprintf(stderr, "Failed to connect to WiFi network\n");
-        printf("Failed to Connect to WiFi network with SSID: %s\n", ssid);
     }
     else
     {
