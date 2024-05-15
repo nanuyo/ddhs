@@ -57,18 +57,27 @@ void stop_softap_mode() {
     }
 }
 
-void start_station_mode(const char *ssid, const char *password) {
+int start_station_mode(const char *ssid, const char *password) {
     char command[BUFFER_SIZE];
-
+    int scan_result;
+    
+    system("sudo nmcli radio wifi off");
+    sleep(1);
+    system("sudo nmcli radio wifi on");
+    sleep(3);
+    scan_result = system("nmcli dev wifi rescan");
+    sleep(3);
     // Connect to the specified WiFi network
     snprintf(command, sizeof(command), "nmcli device wifi connect \"%s\" password \"%s\"", ssid, password);
     int result = system(command);
     if (result != 0) {
         fprintf(stderr, "Failed to connect to WiFi network\n");
-        exit(EXIT_FAILURE);
+        //exit(EXIT_FAILURE);
     } else {
         printf("Connected to WiFi network with SSID: %s\n", ssid);
     }
+
+    return scan_result;
 }
 
 int main() {
@@ -223,8 +232,16 @@ void handle_post_request(int client_socket, char *buffer) {
 // int runrun = 1;
 // int scan_result;
         if (ssid != NULL && password != NULL) {
+            while(1)
+            {
             stop_softap_mode();
-            start_station_mode(ssid, password);
+            if(start_station_mode(ssid, password) != 0)
+             continue;
+            else
+             break;
+
+            }
+
 // while(runrun)
 // {
 //             // Check if scanning is allowed and perform a scan if possible
