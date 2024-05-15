@@ -181,6 +181,7 @@ void handle_post_request(int client_socket, char *buffer)
             {
                 free(ssid);
                 free(password);
+                start_softap_mode(ap_ssid, ap_password, ap_ip_address);
             }
         }
         else
