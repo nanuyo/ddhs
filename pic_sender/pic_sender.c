@@ -40,7 +40,7 @@ int client_jpg_sender(char *jpgname)
     int file_fd;
 
     // Create a socket
-    if ((client_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
+    if ((client_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
     {
         perror("socket failed");
         exit(EXIT_FAILURE);
