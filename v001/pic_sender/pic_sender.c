@@ -29,7 +29,9 @@
 // #define SERVER_ADDRESS "172.30.1.98"
 // #define SERVER_ADDRESS "192.168.0.51"
 // #define SERVER_ADDRESS "192.168.0.3"
-#define SERVER_ADDRESS "59.11.52.50"
+// #define SERVER_ADDRESS "59.11.52.50"
+#define SERVER_ADDRESS "192.168.241.41"
+
 #define BUFFER_SIZE 1024
 
 int client_jpg_sender(char *jpgname)
