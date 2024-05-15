@@ -200,15 +200,15 @@ void handle_post_request(int client_socket, char *buffer) {
 
             // Check if scanning is allowed and perform a scan if possible
             int scan_result = system("nmcli dev wifi rescan");
-            if (scan_result != 0) {
-                // Scanning not allowed, provide an appropriate error message
-                fprintf(stderr, "Scanning not allowed at this time.\n");
-                send(client_socket, error_response, strlen(error_response), 0);
-                printf("Failed to scan for Wi-Fi networks.\n");
-                free(ssid);
-                free(password);
-                return;
-            }
+            // if (scan_result != 0) {
+            //     // Scanning not allowed, provide an appropriate error message
+            //     fprintf(stderr, "Scanning not allowed at this time.\n");
+            //     send(client_socket, error_response, strlen(error_response), 0);
+            //     printf("Failed to scan for Wi-Fi networks.\n");
+            //     free(ssid);
+            //     free(password);
+            //     return;
+            // }
 
             // Use nmcli to configure Wi-Fi
             char command[BUFFER_SIZE];
