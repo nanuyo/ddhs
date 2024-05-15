@@ -115,6 +115,9 @@ int main()
     int opt = 1;
     socklen_t addrlen = sizeof(address);
     char buffer[BUFFER_SIZE] = {0};
+
+    printf("!!!! Please be sure SUDO mode\n");
+
     start_softap_mode(ap_ssid, ap_password, ap_ip_address);
 
     // Create socket
