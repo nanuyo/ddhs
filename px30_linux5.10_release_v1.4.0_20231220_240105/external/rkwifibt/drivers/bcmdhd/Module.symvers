@@ -1,0 +1,2 @@
+0x00000000	bcmsdh_cfg_read	/home/hjpark/px30/px30_linux5.10_release_v1.4.0_20231220_240105/external/rkwifibt/drivers/bcmdhd/bcmdhd	EXPORT_SYMBOL	
+0x00000000	bcmsdh_cfg_write	/home/hjpark/px30/px30_linux5.10_release_v1.4.0_20231220_240105/external/rkwifibt/drivers/bcmdhd/bcmdhd	EXPORT_SYMBOL	

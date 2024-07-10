@@ -1,0 +1,1 @@
+cmd_/home/hjpark/px30/px30_linux5.10_release_v1.4.0_20231220_240105/external/rkwifibt/drivers/bcmdhd/modules.order := {   echo /home/hjpark/px30/px30_linux5.10_release_v1.4.0_20231220_240105/external/rkwifibt/drivers/bcmdhd/bcmdhd.ko; :; } | awk '!x[$$0]++' - > /home/hjpark/px30/px30_linux5.10_release_v1.4.0_20231220_240105/external/rkwifibt/drivers/bcmdhd/modules.order
