@@ -364,7 +364,7 @@ fail_exit:
 int main(int argc, char **argv)
 {
     char *str_stop = "stop";
-    const char *apName = "RK_SOFTAP_TEST";
+    const char *apName = "IMS_SOFTAP";
     const char *apPassword = "12345678";
     const char *wan = "wlan0";
     const char *lan = "wlan1";
@@ -379,6 +379,9 @@ int main(int argc, char **argv)
 	//eth_accesspoint_start();
 	
 	iftables_usb0_to_eth0(wan,lan);
+    
+    sleep(1);
+    console_run("python /usr/bin/http_server_wpa_reboot.py");
 
     return 0;
 }
