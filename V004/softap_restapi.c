@@ -382,6 +382,6 @@ int main(int argc, char **argv)
     
     sleep(1);
     //console_run("python /usr/bin/http_server_wpa_reboot.py");
-    console_run("python /restapi.py");
+    console_run("python /usr/bin/restapi.py");
     return 0;
 }
