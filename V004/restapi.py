@@ -84,7 +84,7 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     return
 
                 # 성공 응답과 함께 장치 ID를 반환합니다.
-                self.respond(200, 'SUCCESS', {'Device Id': DEVICE_ID})
+                self.respond(200, 'SUCCESS', {'deviceid': DEVICE_ID})
             elif self.path.startswith('/reset_users'):
                 REGISTERED_USERS.clear()
                 save_registered_users()
