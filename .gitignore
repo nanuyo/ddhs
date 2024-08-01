@@ -1,3 +1,6 @@
 
 .vscode/c_cpp_properties.json
 mqtt.py
+aws
+AWS_TEST_GT2.py
+S3_upload.py
