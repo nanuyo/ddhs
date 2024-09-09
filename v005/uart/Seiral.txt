@@ -1,0 +1,27 @@
+Received raw data: b'\xd1@\x01\x00}\x00\x00\xed'
+Received (hex): D1 // 40 // 01 // 00 7D // 00 00 // ED
+
+Received raw data: b'\xd1@\x02\x00~\x00\x01\x00\x81\x00\x01l'
+Received (hex): D1 40 02 /00 7E/ 00 01// 00 81// 00 01 // 6C
+
+D1 : startcode
+40 : 세트정보 // 
+01 : 수량
+00 7D : ID addr
+00 00 : value
+ED : CheckSum (xor)
+---------------------------
+
+1. D1 제외 버림
+2. 
+
+
+
+
+
+
+
+
+
+
+ 
