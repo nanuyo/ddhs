@@ -1,0 +1,11 @@
+{
+    "firmware_version_main": 1,
+    "firmware_date_year_main": 2024,
+    "firmware_date_month_main": 12,
+    "firmware_date_day_main": "1",
+    "mode_set_room1": 0,
+    "lightintensity_set_room1": 0,
+    "daylength_set_roo1": 150,
+    "windspeed_set_room1": 255,
+    "mode_set_room2": 0
+}
