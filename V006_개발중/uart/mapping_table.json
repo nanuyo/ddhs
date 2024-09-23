@@ -72,7 +72,11 @@
         "file": "temperature_set_room2.json"
     },
     "000C": {
-        "key": "temperature_set_room2",
-        "file": "temperature_set_room2.json"
+        "key": "lightintensity_set_room2",
+        "file": "lightintensity_set_room2.json"
+    },
+    "000D": {
+        "key": "daylength_set_room2",
+        "file": "daylength_set_room2.json"
     },
 }
