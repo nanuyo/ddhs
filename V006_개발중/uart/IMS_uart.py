@@ -5,7 +5,7 @@ import threading
 import time
 
 # 시리얼 포트 설정 (포트 이름과 통신 속도 설정)
-SERIAL_PORT = 'COM3'
+SERIAL_PORT = '/dev/ttyS3'
 BAUD_RATE = 115200
 TIMEOUT = 1
 

@@ -39,28 +39,40 @@
         "key": "firmware_date_day_main",
         "file": "firmware.json"
     },
+    "0004": {
+        "key": "ec_set",
+        "file": "ec_set.json"
+    },
     "0005": {
         "key": "mode_set_room1",
-        "file": "alarms.json"
+        "file": "mode_set_room1.json"
     },
     "0006": {
         "key": "temperature_set_room1",
-        "file": "alarms.json"
+        "file": "temperature_set_room1.json"
     },
     "0007": {
         "key": "lightintensity_set_room1",
-        "file": "alarms.json"
+        "file": "lightintensity_set_room1.json"
     },
     "0008": {
         "key": "daylength_set_roo1",
-        "file": "alarms.json"
+        "file": "daylength_set_roo1.json"
     },
     "0009": {
         "key": "windspeed_set_room1",
-        "file": "alarms.json"
+        "file": "windspeed_set_room1.json"
     },
     "000A": {
         "key": "mode_set_room2",
-        "file": "alarms.json"
-    }              
+        "file": "mode_set_room2.json"
+    },             
+    "000B": {
+        "key": "temperature_set_room2",
+        "file": "temperature_set_room2.json"
+    },
+    "000C": {
+        "key": "temperature_set_room2",
+        "file": "temperature_set_room2.json"
+    },
 }
