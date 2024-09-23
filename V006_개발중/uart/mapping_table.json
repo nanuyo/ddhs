@@ -79,4 +79,108 @@
         "key": "daylength_set_room2",
         "file": "daylength_set_room2.json"
     },
+    "000E": {
+        "key": "windspeed_set_room2",
+        "file": "windspeed_set_room2.json"
+    },
+    "000F": {
+        "key": "mode_set_room3",
+        "file": "mode_set_room3.json"
+    },
+    "0010": {
+        "key": "temperature_set_room3",
+        "file": "temperature_set_room3.json"
+    },
+    "0011": {
+        "key": "lightintensity_set_room3",
+        "file": "lightintensity_set_room3.json"
+    },
+    "0012": {
+        "key": "daylength_set_room3",
+        "file": "daylength_set_room3.json"
+    },
+    "0013": {
+        "key": "windspeed_set_room3",
+        "file": "windspeed_set_room3.json"
+    },
+    "0014": {
+        "key": "hour_after_seed_room1",
+        "file": "hour_after_seed_room1.json"
+    },
+    "0015": {
+        "key": "hour_after_seed_room2",
+        "file": "hour_after_seed_room2.json"
+    },
+    "0016": {
+        "key": "hour_after_seed_room3",
+        "file": "hour_after_seed_room3.json"
+    },
+    "0017": {
+        "key": "temperature_outside",
+        "file": "temperature_outside.json"
+    },
+    "0018": {
+        "key": "temperature_room1",
+        "file": "temperature_room1.json"
+    },
+    "0019": {
+        "key": "temperature_room2",
+        "file": "temperature_room2.json"
+    },
+    "001A": {
+        "key": "temperature_room3",
+        "file": "temperature_room3.json"
+    },
+    "001B": {
+        "key": "temperature_eva_in",
+        "file": "temperature_eva_in.json"
+    },
+    "001C": {
+        "key": "mixtank_water_temperature",
+        "file": "mixtank_water_temperature.json"
+    },
+    "001D": {
+        "key": "humidity_outside",
+        "file": "humidity_outside.json"
+    },
+    "001E": {
+        "key": "humidity_room1",
+        "file": "humidity_room1.json"
+    },
+    "001F": {
+        "key": "humidity_room2",
+        "file": "humidity_room2.json"
+    },
+    "0020": {
+        "key": "humidity_room3",
+        "file": "humidity_room3.json"
+    },
+    "0021": {
+        "key": "solution_flow",
+        "file": "solution_flow.json"
+    },
+    "0022": {
+        "key": "mixtank_flow",
+        "file": "mixtank_flow.json"
+    },
+    "0023": {
+        "key": "mixtank_ec",
+        "file": "mixtank_ec.json"
+    },
+    "0024": {
+        "key": "FanRpm_room1",
+        "file": "FanRpm_room1.json"
+    },
+    "0025": {
+        "key": "FanRpm_room2",
+        "file": "FanRpm_room2.json"
+    },
+    "0026": {
+        "key": "FanRpm_room3",
+        "file": "FanRpm_room3.json"
+    },
+    "0027": {
+        "key": "Rpm_Comp",
+        "file": "Rpm_Comp.json"
+    },
 }
