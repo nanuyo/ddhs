@@ -22,21 +22,12 @@ running = True
 
 def load_mapping_table(mapping_file):
     """매핑 테이블을 JSON 파일에서 불러옵니다."""
-    if os.path.exists(mapping_file):
-        print(f"File {mapping_file} exists.")
-        try:
-            with open(mapping_file, 'r') as file:
-                content = file.read()  # 파일 내용을 읽어옴
-                #print(f"File content: {content}")  # 파일 내용 출력
-                return json.loads(content)  # json.load -> json.loads(content)로 수정
-        except json.JSONDecodeError as e:
-            print(f'JSON decoding error: {e}')  # JSON 디코딩 에러 출력
-        except Exception as e:
-            print(f'Failed to load mapping table: {e}')  # 기타 에러 출력
-            return None
-    else:
-        print(f"File {mapping_file} does not exist.")
-        return None
+    try:
+        with open(mapping_file, 'r') as file:
+            return json.load(file)
+    except Exception as e:
+        print(f'Failed to load mapping table: {e}')
+        exit(1)
 
 def initialize_serial(port, baud_rate, timeout):
     """시리얼 포트를 초기화합니다."""
@@ -228,7 +219,7 @@ def process_json_and_send(ser, mapping_table, json_data):
     else:
         print("No data to send.")
 
-def check_and_process_server_json(ser, send_mapping_table):
+def check_and_process_server_json(ser, mapping_table):
     """서버에서 받은 JSON 파일을 확인하고 처리."""
     try:
         for file_name in os.listdir(SERVER_JSON_DIR):
@@ -238,7 +229,7 @@ def check_and_process_server_json(ser, send_mapping_table):
                     with open(file_path, 'r') as json_file:
                         json_data = json.load(json_file)
                         print(f"Processing server JSON file: {file_name}")
-                        process_json_and_send(ser, send_mapping_table, json_data)
+                        process_json_and_send(ser, mapping_table, json_data)
                     
                     # 전송이 완료되면 파일 삭제
                     # os.remove(file_path)

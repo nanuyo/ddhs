@@ -1,0 +1,190 @@
+{
+    "0000": {
+        "key": "auto_manual_mode",
+        "file": "test.json"
+    },
+    "0004": {
+        "key": "light_off_time",
+        "file": "test.json"
+    },
+    "0006": {
+        "key": "fan_control_room1",
+        "file": "test.json"
+    },
+    "0007": {
+        "key": "fan_control_room2",
+        "file": "test.json"
+    },
+    "0008": {
+        "key": "fan_control_room3",
+        "file": "test.json"
+    },
+    "0009": {
+        "key": "exhaust_fan_control",
+        "file": "test.json"
+    },
+    "0010": {
+        "key": "agitation_motor_control",
+        "file": "test.json"
+    },
+    "0011": {
+        "key": "led_control_room1",
+        "file": "test.json"
+    },
+    "0012": {
+        "key": "led_control_room2",
+        "file": "test.json"
+    },
+    "0013": {
+        "key": "led_control_room3",
+        "file": "test.json"
+    },
+    "0014": {
+        "key": "heater_control_room1",
+        "file": "test.json"
+    },
+    "0015": {
+        "key": "heater_control_room2",
+        "file": "test.json"
+    },
+    "0016": {
+        "key": "heater_control_room3",
+        "file": "test.json"
+    },
+    "0017": {
+        "key": "heater_condensate_control",
+        "file": "test.json"
+    },
+    "0018": {
+        "key": "water_pump_control",
+        "file": "test.json"
+    },
+    "0019": {
+        "key": "solution_pump_control",
+        "file": "test.json"
+    },
+    "0020": {
+        "key": "mix_pump_control",
+        "file": "test.json"
+    },
+    "0021": {
+        "key": "solvalve_control_room1",
+        "file": "test.json"
+    },
+    "0022": {
+        "key": "solvalve_control_room2",
+        "file": "test.json"
+    },
+    "0023": {
+        "key": "solvalve_control_room3",
+        "file": "test.json"
+    },
+    "0024": {
+        "key": "water_auto_valve_control",
+        "file": "test.json"
+    },
+    "0025": {
+        "key": "compressor_control",
+        "file": "test.json"
+    },
+    "0027": {
+        "key": "mode",
+        "file": "test.json"
+    },
+    "0033": {
+        "key": "temperature_set_day_stage1",
+        "file": "test.json"
+    },
+    "0034": {
+        "key": "temperature_set_night_stage1",
+        "file": "test.json"
+    },
+    "0035": {
+        "key": "lightintensity_set_stage1",
+        "file": "test.json"
+    },
+    "0036": {
+        "key": "daylength_set_stage1",
+        "file": "test.json"
+    },
+    "0037": {
+        "key": "windspeed_set_stage1",
+        "file": "test.json"
+    },
+    "0038": {
+        "key": "ec_stage1",
+        "file": "test.json"
+    },
+    "0040": {
+        "key": "temperature_set_day_stage2",
+        "file": "test.json"
+    },
+    "0041": {
+        "key": "temperature_set_night_stage2",
+        "file": "test.json"
+    },
+    "0042": {
+        "key": "lightintensity_set_stage2",
+        "file": "test.json"
+    },
+    "0043": {
+        "key": "daylength_set_stage2",
+        "file": "test.json"
+    },
+    "0044": {
+        "key": "windspeed_set_stage2",
+        "file": "test.json"
+    },
+    "0045": {
+        "key": "ec_stage2",
+        "file": "test.json"
+    },
+    "0047": {
+        "key": "temperature_set_day_stage3",
+        "file": "test.json"
+    },
+    "0048": {
+        "key": "temperature_set_night_stage3",
+        "file": "test.json"
+    },
+    "0049": {
+        "key": "lightintensity_set_stage3",
+        "file": "test.json"
+    },
+    "0050": {
+        "key": "daylength_set_stage3",
+        "file": "test.json"
+    },
+    "0051": {
+        "key": "windspeed_set_stage3",
+        "file": "test.json"
+    },
+    "0052": {
+        "key": "ec_stage3",
+        "file": "test.json"
+    },
+    "0054": {
+        "key": "temperature_set_day_stage4",
+        "file": "test.json"
+    },
+    "0055": {
+        "key": "temperature_set_night_stage4",
+        "file": "test.json"
+    },
+    "0056": {
+        "key": "lightintensity_set_stage4",
+        "file": "test.json"
+    },
+    "0057": {
+        "key": "daylength_set_stage4",
+        "file": "test.json"
+    },
+    "0058": {
+        "key": "windspeed_set_stage4",
+        "file": "test.json"
+    },
+    "0059": {
+        "key": "ec_stage4",
+        "file": "test.json"
+    }
+}

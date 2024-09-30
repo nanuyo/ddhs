@@ -10,8 +10,8 @@ BAUD_RATE = 115200
 TIMEOUT = 1
 
 # JSON 파일 경로와 매핑 테이블 파일 경로
-MAPPING_TABLE_FILE = './mapping_table.json' #수신용 mapping table
-SEND_MAPPING_TABLE_FILE = './send_mapping_table.json' #송신용 mapping table
+MAPPING_TABLE_FILE = './mapping_table.json'  # 수신용 mapping table
+SEND_MAPPING_TABLE_FILE = './send_mapping_table.json'  # 송신용 mapping table
 SERVER_JSON_DIR = './send_data/'  # 서버에서 받은 JSON 파일이 저장되는 디렉토리
 BASE_DIRECTORY = './'  # 수신 데이터 저장 기본 디렉토리
 
@@ -27,12 +27,11 @@ def load_mapping_table(mapping_file):
         try:
             with open(mapping_file, 'r') as file:
                 content = file.read()  # 파일 내용을 읽어옴
-                #print(f"File content: {content}")  # 파일 내용 출력
-                return json.loads(content)  # json.load -> json.loads(content)로 수정
+                return json.loads(content)
         except json.JSONDecodeError as e:
-            print(f'JSON decoding error: {e}')  # JSON 디코딩 에러 출력
+            print(f'JSON decoding error: {e}')
         except Exception as e:
-            print(f'Failed to load mapping table: {e}')  # 기타 에러 출력
+            print(f'Failed to load mapping table: {e}')
             return None
     else:
         print(f"File {mapping_file} does not exist.")
@@ -150,9 +149,8 @@ def receive_data_and_save(ser, mapping_table):
                 
                 # Set Info 값 40 확인
                 if set_info != 0x40:
-                    print(f"Invalid Set Info: {set_info:02X}. Expected 40. Discarding pakcet.")
+                    print(f"Invalid Set Info: {set_info:02X}. Expected 40. Discarding packet.")
                     continue
-                
                 
                 data_length = 3 + quantity * 4 + 1  # 전체 패킷 길이 계산
                 remaining_data = ser.read(data_length - 3)  # 나머지 데이터 읽기
@@ -189,21 +187,31 @@ def send_data_to_mcu(ser, register, value_bytes):
     except Exception as e:
         print(f"Error sending data to MCU: {e}")
 
-def process_json_and_send(ser, mapping_table, json_data):
-    """매핑 테이블을 참조하여 JSON 데이터를 UART로 전송."""
+def process_json_and_send(ser, send_mapping_table, json_data):
+    """송신용 매핑 테이블을 참조하여 JSON 데이터를 UART로 전송."""
     send_data_list = []  # 전송할 데이터 목록을 저장하는 리스트
 
-    for register, mapping in mapping_table.items():
-        key = mapping["key"]
-        if key in json_data:
-            value = json_data[key]
-            value_bytes = convert_value_to_bytes(value, 2)
+    for address, mapping in send_mapping_table.items():  # address가 키 역할
+        key_name = mapping.get('key')  # 매핑 테이블에서 key 가져오기
+        if key_name is None:
+            # print(f"Key is missing for address {address}, skipping.")
+            continue
+
+        # 디버깅용 출력 추가: key가 제대로 있는지 확인
+        # print(f"Checking if key '{key_name}' exists in JSON data...")
+
+        if key_name in json_data:  # JSON 데이터에 해당 키가 있는 경우에만 처리
+            value = json_data[key_name]  # JSON 데이터에서 값을 가져옴
+            # print(f"Key '{key_name}' found in JSON data with value: {value}")
+
+            value_bytes = convert_value_to_bytes(value, 2)  # 값을 2바이트로 변환
 
             if value_bytes:
-                # 전송할 레지스터와 값 쌍을 리스트에 추가
-                send_data_list.append((register, value_bytes))
+                send_data_list.append((address, value_bytes))
+        else:
+            # print(f"Key '{key_name}' not found in JSON data, skipping.")
+            pass
 
-    # 수량을 전송할 데이터의 개수로 설정
     quantity = len(send_data_list)
 
     if quantity > 0:
@@ -211,18 +219,15 @@ def process_json_and_send(ser, mapping_table, json_data):
         set_info = bytes.fromhex('10')  # 세트 정보
         quantity_bytes = quantity.to_bytes(1, byteorder='big')  # 수량(전송할 레지스터 개수)
 
-        # 각 데이터를 하나의 패킷으로 결합
         data_to_send = startcode + set_info + quantity_bytes
 
-        for register, value_bytes in send_data_list:
-            id_addr = bytes.fromhex(register)  # 레지스터 주소
+        for address, value_bytes in send_data_list:
+            id_addr = bytes.fromhex(address)  # 레지스터 주소 (address는 16진수 문자열)
             data_to_send += id_addr + value_bytes  # 주소와 값 결합
 
-        # 체크섬 계산 및 추가
         checksum = calculate_checksum(data_to_send)
         data_to_send += checksum.to_bytes(1, byteorder='big')
 
-        # UART로 전송
         ser.write(data_to_send)
         print(f"Sent data to MCU: {data_to_send.hex()}")
     else:
@@ -277,7 +282,7 @@ def main():
     try:
         while True:
             # 서버에서 받은 JSON 파일을 주기적으로 확인하고 처리
-            check_and_process_server_json(ser, mapping_table)
+            check_and_process_server_json(ser, send_mapping_table)  # 여기서 send_mapping_table을 사용
             time.sleep(2)  # 매 2초마다 파일을 확인
 
     except KeyboardInterrupt:
