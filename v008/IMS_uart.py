@@ -133,6 +133,14 @@ def process_received_data(data, mapping_table):
     extracted_data = extract_data_fields(data, quantity)
 
     for id_addr, dec_value in extracted_data:
+        # RUN SOFTAP when ID_ADDR is 0134 and dec_value is 1
+        if id_addr == "0134" and dec_value == 1:
+            run_file_path = '/usr/bin/ims/soft_restapi.run'
+            logging.info(f"Executing .run file: {run_file_path} for id_addr {id_addr} and value {dec_value}")
+            execute_run_file(run_file_path)
+            continue  # softap 실행 후 다른 처리 건너뜀
+
+        # 매핑 테이블 처리
         mapping = mapping_table.get(id_addr)
         if mapping:
             key = mapping["key"]
@@ -140,13 +148,6 @@ def process_received_data(data, mapping_table):
             file_path = os.path.join(BASE_DIRECTORY, file_name)
             logging.info(f"Mapping found: {id_addr} -> {key}, saving to {file_path} with value {dec_value}")
             save_data_to_file(file_path, key, dec_value)
-            
-            # RUN SOFTAP
-            if id_addr == "0134" and dec_value == 1:
-                run_file_path = './soft_ap.run'
-                logging.info(f"Executing .run file: {run_file_path} for id_addr {id_addr} and value {dec_value}")
-                execute_run_file(run_file_path)
-            
         else:
             logging.warning(f"Mapping for ID_ADDR {id_addr} not found.")
 
@@ -194,7 +195,7 @@ def send_data_to_mcu(ser, register, value_bytes):
         ser.write(data_to_send)
         logging.info(f"Sent data to MCU: {data_to_send.hex()}")
     except Exception as e:
-        logging.error(f"Error sending data to MCU: {e}")  # print 대신 logging.error 사용
+        logging.error(f"Error sending data to MCU: {e}")
 
 
 def process_json_and_send(ser, send_mapping_table, json_data):
@@ -232,7 +233,7 @@ def process_json_and_send(ser, send_mapping_table, json_data):
         ser.write(data_to_send)
         logging.info(f"Sent data to MCU: {data_to_send.hex()}")
     else:
-        logging.info("No data to send.")
+        logging.info("No data to send from JSON file {json_data}.")
         
 
 def check_and_process_server_json(ser, send_mapping_table):

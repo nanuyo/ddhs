@@ -39,12 +39,13 @@ def receive_data():
 
 def sender():
     while True:
-        # "orange" 문자열을 계속 전송
-        data_to_send = "D1400101340001A4"
-        send_data(data_to_send)
-        time.sleep(10)  # 2초 간격으로 전송
+        data_to_send = bytes.fromhex("D1400101340001A4")
+        ser.write(data_to_send)
+        print(f"Data sent: {data_to_send.hex().upper()}")
+        time.sleep(10)
 
 def receiver():
+    
     while True:
         # 데이터 수신
         received = receive_data()
