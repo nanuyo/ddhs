@@ -135,7 +135,7 @@ def process_received_data(data, mapping_table):
     for id_addr, dec_value in extracted_data:
         # RUN SOFTAP when ID_ADDR is 0134 and dec_value is 1
         if id_addr == "0134" and dec_value == 1:
-            run_file_path = '/usr/bin/ims/soft_restapi.run'
+            run_file_path = '/usr/bin/ims/softap_restapi.run'
             logging.info(f"Executing .run file: {run_file_path} for id_addr {id_addr} and value {dec_value}")
             execute_run_file(run_file_path)
             continue  # softap 실행 후 다른 처리 건너뜀
