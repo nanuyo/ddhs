@@ -2,7 +2,7 @@ import socket
 import struct
 import time
 
-def get_utc_time_and_zone(host='pool.ntp.org'):
+def get_utc_time_and_zone(host='0.pool.ntp.org'):
     # NTP settings
     port = 123
     buffer_size = 48
