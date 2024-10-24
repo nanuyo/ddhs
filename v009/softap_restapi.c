@@ -1,0 +1,387 @@
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+#include <errno.h>
+#include <stdbool.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#define SOFTAP_VERSION "1.0"
+#define DBG true
+
+#if DBG
+#define DEBUG_INFO(M, ...) printf("DEBUG %d: " M, __LINE__, ##__VA_ARGS__)
+#else
+#define DEBUG_INFO(M, ...) do {} while (0)
+#endif
+#define DEBUG_ERR(M, ...) printf("DEBUG %d: " M, __LINE__, ##__VA_ARGS__)
+
+//rtl8723bs and ap6214
+static char wifi_type[64];
+
+#define WIFI_CHIP_TYPE_PATH     "/sys/class/rkwifi/chip"
+static const char SOFTAP_INTERFACE_STATIC_IP[] = "192.168.43.1";
+static const char dhcp_range[] = "dhcp-range=192.168.43.2,192.168.43.60";
+static const char DNSMASQ_CONF_DIR[] = "/usr/bin/dnsmasq.conf";
+// hostapd
+static const char HOSTAPD_CONF_DIR[] = "/usr/bin/hostapd.conf";
+//static char softap_name[64] = "p2p0";
+static char softap_name[64] = "wlan1";
+
+const bool console_run(const char *cmdline)
+{
+    DEBUG_INFO("cmdline = %s\n", cmdline);
+    int ret;
+    ret = system(cmdline);
+    if (ret < 0) {
+        DEBUG_ERR("Running cmdline failed: %s\n", cmdline);
+        return false;
+    }
+    return true;
+}
+
+
+int get_pid(char *Name)
+{
+    int len;
+    char name[20] = {0};
+    len = strlen(Name);
+    strncpy(name,Name,len);
+    name[len] ='\0';
+    char cmdresult[256] = {0};
+    char cmd[20] = {0};
+    FILE *pFile = NULL;
+    int  pid = 0;
+
+    sprintf(cmd, "pidof %s", name);
+    pFile = popen(cmd, "r");
+    if (pFile != NULL) {
+        while (fgets(cmdresult, sizeof(cmdresult), pFile)) {
+            pid = atoi(cmdresult);
+            DEBUG_INFO("--- %s pid = %d ---\n", name, pid);
+            break;
+        }
+    }
+    pclose(pFile);
+    return pid;
+}
+
+int get_dnsmasq_pid()
+{
+    int ret;
+    ret = get_pid("dnsmasq");
+    return ret;
+}
+
+int get_hostapd_pid()
+{
+    int ret;
+    ret = get_pid("hostapd");
+    return ret;
+}
+
+
+int wifi_rtl_stop_hostapd()
+{
+    int pid;
+    char *cmd = NULL;
+
+    pid = get_hostapd_pid();
+
+    if (pid!=0) {
+        asprintf(&cmd, "kill %d", pid);
+        console_run(cmd);
+        console_run("killall hostapd");
+        free(cmd);
+    }
+    return 0;
+}
+
+int create_hostapd_file(const char* name, const char* password)
+{
+    FILE* fp;
+    char cmdline[256] = {0};
+
+    fp = fopen(HOSTAPD_CONF_DIR, "wt+");
+
+    if (fp != 0) {
+        sprintf(cmdline, "interface=%s\n", softap_name);
+        fputs(cmdline, fp);
+        fputs("ctrl_interface=/var/run/hostapd\n", fp);
+        fputs("driver=nl80211\n", fp);
+        fputs("ssid=", fp);
+        fputs(name, fp);
+        fputs("\n", fp);
+        fputs("channel=6\n", fp);
+        fputs("hw_mode=g\n", fp);
+        fputs("ieee80211n=1\n", fp);
+        fputs("ignore_broadcast_ssid=0\n", fp);
+#if 1
+        fputs("auth_algs=1\n", fp);
+        fputs("wpa=3\n", fp);
+        fputs("wpa_passphrase=", fp);
+        fputs(password, fp);
+        fputs("\n", fp);
+        fputs("wpa_key_mgmt=WPA-PSK\n", fp);
+        fputs("wpa_pairwise=TKIP\n", fp);
+        fputs("rsn_pairwise=CCMP", fp);
+#endif
+        fclose(fp);
+        return 0;
+    }
+    return -1;
+}
+
+bool creat_dnsmasq_file()
+{
+    FILE* fp;
+    char cmdline[64] = {0};
+    fp = fopen(DNSMASQ_CONF_DIR, "wt+");
+    if (fp != 0) {
+        fputs("user=root\n", fp);
+        fputs("listen-address=", fp);
+        fputs(SOFTAP_INTERFACE_STATIC_IP, fp);
+        fputs("\n", fp);
+        fputs(dhcp_range, fp);
+        fputs("\n", fp);
+        fputs("server=/google/8.8.8.8\n", fp);
+        fclose(fp);
+        return true;
+    }
+    DEBUG_ERR("---open dnsmasq configuarion file failed!!---");
+    return true;
+}
+
+int wlan_accesspoint_start(const char* ssid, const char* password)
+{
+    char cmdline[256] = {0};
+    create_hostapd_file(ssid, password);
+
+    console_run("killall dnsmasq");
+    sprintf(cmdline, "ifconfig %s up", softap_name);
+    console_run(cmdline);
+
+    sprintf(cmdline, "ifconfig %s %s netmask 255.255.255.0", softap_name,SOFTAP_INTERFACE_STATIC_IP);
+    console_run(cmdline);
+    //sprintf(cmdline, "route add default gw 192.168.88.1 %s", softap_name);
+    console_run(cmdline);
+    creat_dnsmasq_file();
+    int dnsmasq_pid = get_dnsmasq_pid();
+    if (dnsmasq_pid != 0) {
+        memset(cmdline, 0, sizeof(cmdline));
+        sprintf(cmdline, "kill %d", dnsmasq_pid);
+        console_run(cmdline);
+    }
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "dnsmasq -C %s --interface=%s", DNSMASQ_CONF_DIR, softap_name);
+    console_run(cmdline);
+
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "hostapd %s &", HOSTAPD_CONF_DIR);
+    console_run(cmdline);
+    return 1;
+}
+
+
+int eth_accesspoint_start()
+{
+    char cmdline[256] = {0};
+
+    console_run("killall dnsmasq");
+    sprintf(cmdline, "ifconfig %s up", softap_name);
+    console_run(cmdline);
+
+    sprintf(cmdline, "ifconfig %s %s netmask 255.255.255.0", softap_name,SOFTAP_INTERFACE_STATIC_IP);
+    console_run(cmdline);
+
+    creat_dnsmasq_file();
+    int dnsmasq_pid = get_dnsmasq_pid();
+    if (dnsmasq_pid != 0) {
+        memset(cmdline, 0, sizeof(cmdline));
+        sprintf(cmdline, "kill %d", dnsmasq_pid);
+        console_run(cmdline);
+    }
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "dnsmasq -C %s --interface=%s", DNSMASQ_CONF_DIR, softap_name);
+    console_run(cmdline);
+	
+    return 1;
+}
+
+
+const int wifi_dhd_start_softap(const char* apName, const char* apPassword)
+{
+    char cmdline[256] = {0};
+    // 1. enable WiFi interface
+    console_run("ifconfig wlan0 up");
+    // 2. initiate apsta mode
+    console_run("dhd_priv iapsta_init mode apsta");
+    // 3. eable softap mode with ssid name
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "dhd_priv iapsta_config ifname wlan1 ssid %s chan 6 amode open emode none", apName);
+    console_run(cmdline);
+    console_run("dhd_priv iapsta_enable ifname wlan1");
+    // 4. set static IP addres
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "ifconfig wlan1 %s", SOFTAP_INTERFACE_STATIC_IP);
+    console_run(cmdline);
+    // 5. dnsmasql wl0.1 interface
+    // creat_dnsmasq_file();
+    int dnsmasq_pid = get_dnsmasq_pid();
+    if (dnsmasq_pid != 0) {
+        memset(cmdline, 0, sizeof(cmdline));
+        sprintf(cmdline, "kill %d", dnsmasq_pid);
+        console_run(cmdline);
+    }
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "dnsmasq -C %s --interface=wlan1", DNSMASQ_CONF_DIR);
+    console_run(cmdline);
+    return 1;
+}
+
+const int wifi_dhd_stop_softap()
+{
+    console_run("dhd_priv iapsta_disable ifname wlan1");
+    return 0;
+}
+
+const int iftables_eth0_to_wl0(const char* wan,const char* lan)
+{
+    char cmdline[256] = {0};
+
+    console_run("ifconfig wlan0 up");
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "ifconfig wlan1 %s netmask 255.255.255.0", SOFTAP_INTERFACE_STATIC_IP);
+    console_run(cmdline);
+    console_run("echo 1 > /proc/sys/net/ipv4/ip_forward");
+    console_run("iptables --flush");
+    console_run("iptables --table nat --flush");
+    console_run("iptables --delete-chain");
+    console_run("iptables --table nat --delete-chain");
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "iptables -A FORWARD -i %s -o %s -m state --state ESTABLISHED,RELATED -j ACCEPT",lan,wan);
+    console_run(cmdline);
+
+   memset(cmdline, 0, sizeof(cmdline));
+   sprintf(cmdline, "iptables -A FORWARD -i %s -o %s -j ACCEPT",lan,wan);
+   console_run(cmdline);
+
+   memset(cmdline, 0, sizeof(cmdline));
+   sprintf(cmdline, "iptables -t nat -A POSTROUTING -o %s -j MASQUERADE",wan);
+   console_run(cmdline);
+
+   memset(cmdline, 0, sizeof(cmdline));
+   sprintf(cmdline, "iptables -t nat -I PREROUTING -i %s -p udp --dport 53 -j DNAT --to-destination 114.114.114.114",lan);
+   console_run(cmdline);
+
+
+    return 0;
+}
+
+
+const int iftables_usb0_to_eth0(const char* wan,const char* lan)
+{
+    char cmdline[256] = {0};
+
+    console_run("ifconfig wlan0 up");
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "ifconfig wlan1 %s netmask 255.255.255.0", SOFTAP_INTERFACE_STATIC_IP);
+    console_run(cmdline);
+    console_run("echo 1 > /proc/sys/net/ipv4/ip_forward");
+    console_run("iptables --flush");
+    console_run("iptables --table nat --flush");
+    console_run("iptables --delete-chain");
+    console_run("iptables --table nat --delete-chain");
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "iptables -A FORWARD -i %s -o %s -m state --state ESTABLISHED,RELATED -j ACCEPT",lan,wan);
+    console_run(cmdline);
+
+   memset(cmdline, 0, sizeof(cmdline));
+   sprintf(cmdline, "iptables -A FORWARD -i %s -o %s -j ACCEPT",lan,wan);
+   console_run(cmdline);
+
+   memset(cmdline, 0, sizeof(cmdline));
+   sprintf(cmdline, "iptables -t nat -A POSTROUTING -o %s -j MASQUERADE",wan);
+   console_run(cmdline);
+
+   memset(cmdline, 0, sizeof(cmdline));
+   sprintf(cmdline, "iptables -t nat -I PREROUTING -i %s -p udp --dport 53 -j DNAT --to-destination 114.114.114.114",lan);
+   console_run(cmdline);
+
+
+    return 0;
+}
+
+const int iftables_eth0_to_p2p0(const char* wan,const char* lan)
+{
+    char cmdline[256] = {0};
+
+    console_run("ifconfig wlan0 up");
+    memset(cmdline, 0, sizeof(cmdline));
+    sprintf(cmdline, "ifconfig p2p0 %s netmask 255.255.255.0", SOFTAP_INTERFACE_STATIC_IP);
+    console_run(cmdline);
+    console_run("echo 1 > /proc/sys/net/ipv4/ip_forward");
+    console_run("iptables --flush");
+    console_run("iptables --table nat --flush");
+    console_run("iptables --delete-chain");
+    console_run("iptables --table nat --delete-chain");
+    console_run("iptables --table nat --append POSTROUTING --out-interface p2p0 -j MASQUERADE");
+    console_run("iptables --append FORWARD --in-interface wlan0 -j ACCEPT");
+	
+    return 0;
+}
+
+int check_wifi_chip_type_string(char *type)
+{
+    int wififd, ret = 0;
+    char buf[64];
+
+    wififd = open(WIFI_CHIP_TYPE_PATH, O_RDONLY);
+    if (wififd < 0 ) {
+        DEBUG_ERR("Can't open %s, errno = %d", WIFI_CHIP_TYPE_PATH, errno);
+        ret = -1;
+        goto fail_exit;
+    }
+    memset(buf, 0, 64);
+
+    if (0 == read(wififd, buf, 32)) {
+        DEBUG_ERR("read %s failed", WIFI_CHIP_TYPE_PATH);
+        close(wififd);
+        ret = -1;
+        goto fail_exit;
+    }
+    close(wififd);
+
+    strcpy(type, buf);
+    DEBUG_INFO("%s: %s", __FUNCTION__, type);
+
+fail_exit:
+    return ret;
+}
+
+int main(int argc, char **argv)
+{
+    char *str_stop = "stop";
+    const char *apName = "IMS_SOFTAP";
+    const char *apPassword = "12345678";
+    const char *wan = "wlan0";
+    const char *lan = "wlan1";
+
+    DEBUG_INFO("\nsoftap_version: %s\n", SOFTAP_VERSION);	
+	DEBUG_INFO("Ethernet shared 4G network:\n");
+    console_run("killall dnsmasq");
+	console_run("killall udhcpc");
+	//共享wifi网络
+	wlan_accesspoint_start(apName,apPassword);
+	//共享以太网
+	//eth_accesspoint_start();
+	
+	iftables_usb0_to_eth0(wan,lan);
+    
+    sleep(1);
+    //console_run("python /usr/bin/http_server_wpa_reboot.py");
+    console_run("python /usr/bin/ims/restapi.py");
+    return 0;
+}

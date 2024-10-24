@@ -1,0 +1,66 @@
+{
+    "007E": {
+        "key": "temperature_outside",
+        "file": "sensor1.json"
+    },
+    "0081": {
+        "key": "humidity_outside",
+        "file": "sensor1.json"
+    },
+    "00A1": {
+        "key": "main_power",
+        "file": "actuator2.json"
+    },
+    "00A2": {
+        "key": "water_pump",
+        "file": "actuator2.json"
+    },
+    "00B1": {
+        "key": "alarm_door",
+        "file": "alarms.json"
+    },
+    "00B2": {
+        "key": "alarm_water",
+        "file": "alarms.json"
+    },
+    "0000": {
+        "key": "firmware_version_main",
+        "file": "alarms.json"
+    },
+    "0001": {
+        "key": "firmware_date_year_main",
+        "file": "alarms.json"
+    },
+    "0002": {
+        "key": "firmware_date_month_main",
+        "file": "alarms.json"
+    },
+    "0003": {
+        "key": "firmware_date_day_main",
+        "file": "firmware.json"
+    },
+    "0005": {
+        "key": "mode_set_room1",
+        "file": "alarms.json"
+    },
+    "0006": {
+        "key": "temperature_set_room1",
+        "file": "alarms.json"
+    },
+    "0007": {
+        "key": "lightintensity_set_room1",
+        "file": "alarms.json"
+    },
+    "0008": {
+        "key": "daylength_set_roo1",
+        "file": "alarms.json"
+    },
+    "0009": {
+        "key": "windspeed_set_room1",
+        "file": "alarms.json"
+    },
+    "000A": {
+        "key": "mode_set_room2",
+        "file": "alarms.json"
+    }              
+}

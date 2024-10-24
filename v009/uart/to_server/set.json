@@ -1,0 +1,18 @@
+{
+    "ec_set": 0,
+    "mode_set_room1": 0,
+    "temperature_set_room1": 0,
+    "lightintensity_set_room1": 0,
+    "daylength_set_room1": 0,
+    "windspeed_set_room1": 0,
+    "mode_set_room2": 0,
+    "temperature_set_room2": 0,
+    "lightintensity_set_room2": 0,
+    "daylength_set_room2": 0,
+    "windspeed_set_room2": 0,
+    "mode_set_room3": 0,
+    "temperature_set_room3": 0,
+    "lightintensity_set_room3": 0,
+    "daylength_set_room3": 0,
+    "windspeed_set_room3": 0
+  }
