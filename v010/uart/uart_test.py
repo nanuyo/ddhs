@@ -39,7 +39,11 @@ def receive_data():
 
 def sender():
     while True:
-        data_to_send = bytes.fromhex("D140010086000117")
+        data_to_send = bytes.fromhex(
+    "D1 40 0D 00 17 00 BD 00 18 02 94 00 19 00 F8 00 1A 00 F6 00 1B 00 FC"
+    " 00 1C 00 DE 00 1D 00 F8 00 1E 02 39 00 1F 02 90 00 20 00 C5 00 21 00"
+    " 00 00 22 00 00 00 23 00 C3 DB"
+)
         ser.write(data_to_send)
         print(f"Data sent: {data_to_send.hex().upper()}")
         time.sleep(10)

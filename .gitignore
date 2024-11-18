@@ -5,3 +5,7 @@ aws
 AWS_TEST_GT2.py
 S3_upload.py
 .idea
+.pem
+.key
+.crt
+.ca

@@ -1,0 +1,482 @@
+{
+    "0000": {
+        "key": "firmware_version_main",
+        "file": "firmware.json"
+    },
+    "0001": {
+        "key": "firmware_date_year_main",
+        "file": "firmware.json"
+    },
+    "0002": {
+        "key": "firmware_date_month_main",
+        "file": "firmware.json"
+    },
+    "0003": {
+        "key": "firmware_date_day_main",
+        "file": "firmware.json"
+    },
+    "0004": {
+        "key": "ec_set",
+        "file": "set.json"
+    },
+    "0005": {
+        "key": "mode_set_room1",
+        "file": "set.json"
+    },
+    "0006": {
+        "key": "temperature_set_room1",
+        "file": "set.json"
+    },
+    "0007": {
+        "key": "lightintensity_set_room1",
+        "file": "set.json"
+    },
+    "0008": {
+        "key": "daylength_set_room1",
+        "file": "set.json"
+    },
+    "0009": {
+        "key": "windspeed_set_room1",
+        "file": "set.json"
+    },
+    "000A": {
+        "key": "mode_set_room2",
+        "file": "set.json"
+    },
+    "000B": {
+        "key": "temperature_set_room2",
+        "file": "set.json"
+    },
+    "000C": {
+        "key": "lightintensity_set_room2",
+        "file": "set.json"
+    },
+    "000D": {
+        "key": "daylength_set_room2",
+        "file": "set.json"
+    },
+    "000E": {
+        "key": "windspeed_set_room2",
+        "file": "set.json"
+    },
+    "000F": {
+        "key": "mode_set_room3",
+        "file": "set.json"
+    },
+    "0010": {
+        "key": "temperature_set_room3",
+        "file": "set.json"
+    },
+    "0011": {
+        "key": "lightintensity_set_room3",
+        "file": "set.json"
+    },
+    "0012": {
+        "key": "daylength_set_room3",
+        "file": "set.json"
+    },
+    "0013": {
+        "key": "windspeed_set_room3",
+        "file": "set.json"
+    },
+    "0014": {
+        "key": "day_after_seed_room1",
+        "file": "day_after_seed.json"
+    },
+    "0015": {
+        "key": "day_after_seed_room2",
+        "file": "day_after_seed.json"
+    },
+    "0016": {
+        "key": "day_after_seed_room3",
+        "file": "day_after_seed.json"
+    },
+    "0017": {
+        "key": "temperature_outside",
+        "file": "sensor1.json"
+    },
+    "0018": {
+        "key": "temperature_room1",
+        "file": "sensor1.json"
+    },
+    "0019": {
+        "key": "temperature_room2",
+        "file": "sensor1.json"
+    },
+    "001A": {
+        "key": "temperature_room3",
+        "file": "sensor1.json"
+    },
+    "001B": {
+        "key": "temperature_eva_in",
+        "file": "sensor1.json"
+    },
+    "001C": {
+        "key": "mixtank_water_temperature",
+        "file": "sensor1.json"
+    },
+    "001D": {
+        "key": "humidity_outside",
+        "file": "sensor1.json"
+    },
+    "001E": {
+        "key": "humidity_room1",
+        "file": "sensor1.json"
+    },
+    "001F": {
+        "key": "humidity_room2",
+        "file": "sensor1.json"
+    },
+    "0020": {
+        "key": "humidity_room3",
+        "file": "sensor1.json"
+    },
+    "0021": {
+        "key": "solution_flow",
+        "file": "sensor1.json"
+    },
+    "0022": {
+        "key": "mixtank_flow",
+        "file": "sensor1.json"
+    },
+    "0023": {
+        "key": "mixtank_ec",
+        "file": "sensor1.json"
+    },
+    "0024": {
+        "key": "fan_rpm_room1",
+        "file": "sensor2.json"
+    },
+    "0025": {
+        "key": "fan_rpm_room2",
+        "file": "sensor2.json"
+    },
+    "0026": {
+        "key": "fan_rpm_room3",
+        "file": "sensor2.json"
+    },
+    "0027": {
+        "key": "compressor_rpm",
+        "file": "sensor2.json"
+    },
+    "0028": {
+        "key": "led_duty_room1",
+        "file": "sensor2.json"
+    },
+    "0029": {
+        "key": "led_duty_room2",
+        "file": "sensor2.json"
+    },
+    "002A": {
+        "key": "led_duty_room3",
+        "file": "sensor2.json"
+    },
+    "0032": {
+        "key": "compressor",
+        "file": "actuator.json"
+    },
+    "0033": {
+        "key": "solvalve_room1",
+        "file": "actuator.json"
+    },
+    "0034": {
+        "key": "solvalve_room2",
+        "file": "actuator.json"
+    },
+    "0035": {
+        "key": "solvalve_room3",
+        "file": "actuator.json"
+    },
+    "0036": {
+        "key": "water_auto_valve",
+        "file": "actuator.json"
+    },
+    "0037": {
+        "key": "water_pump",
+        "file": "actuator.json"
+    },
+    "0038": {
+        "key": "solution_pump",
+        "file": "actuator.json"
+    },
+    "0039": {
+        "key": "mix_pump",
+        "file": "actuator.json"
+    },
+    "003A": {
+        "key": "fan_room1",
+        "file": "actuator.json"
+    },
+    "003B": {
+        "key": "fan_room2",
+        "file": "actuator.json"
+    },
+    "003C": {
+        "key": "fan_room3",
+        "file": "actuator.json"
+    },
+    "003D": {
+        "key": "fan_exhaust",
+        "file": "actuator.json"
+    },
+    "003E": {
+        "key": "led_room1",
+        "file": "actuator.json"
+    },
+    "003F": {
+        "key": "led_room2",
+        "file": "actuator.json"
+    },
+    "0040": {
+        "key": "led_room3",
+        "file": "actuator.json"
+    },
+    "0046": {
+        "key": "heater_room1",
+        "file": "actuator.json"
+    },
+    "0047": {
+        "key": "heater_room2",
+        "file": "actuator.json"
+    },
+    "0048": {
+        "key": "heater_room3",
+        "file": "actuator.json"
+    },
+    "0049": {
+        "key": "heater_condensate",
+        "file": "actuator.json"
+    },
+    "004A": {
+        "key": "mixmotor",
+        "file": "actuator.json"
+    },
+    "0050": {
+        "key": "tsensor_room1_error",
+        "file": "error.json"
+    },
+    "0051": {
+        "key": "tsensor_room2_error",
+        "file": "error.json"
+    },
+    "0052": {
+        "key": "tsensor_room3_error",
+        "file": "error.json"
+    },
+    "0053": {
+        "key": "tsensor_out_error",
+        "file": "error.json"
+    },
+    "0054": {
+        "key": "tsensor_eva_error",
+        "file": "error.json"
+    },
+    "0055": {
+        "key": "hsensor_room1_error",
+        "file": "error.json"
+    },
+    "0056": {
+        "key": "hsensor_room2_error",
+        "file": "error.json"
+    },
+    "0057": {
+        "key": "hsensor_room3_error",
+        "file": "error.json"
+    },
+    "0058": {
+        "key": "hsensor_out_error",
+        "file": "error.json"
+    },
+    "0059": {
+        "key": "ectemp_error",
+        "file": "error.json"
+    },
+    "005A": {
+        "key": "ec_error",
+        "file": "error.json"
+    },
+    "005B": {
+        "key": "water_low_error",
+        "file": "error.json"
+    },
+    "005C": {
+        "key": "solution_low_error",
+        "file": "error.json"
+    },
+    "005D": {
+        "key": "mix_low_error",
+        "file": "alarm.json"
+    },
+    "0064": {
+        "key": "fan_room1_error",
+        "file": "error.json"
+    },
+    "0065": {
+        "key": "fan_room2_error",
+        "file": "error.json"
+    },
+    "0066": {
+        "key": "fan_room3_error",
+        "file": "error.json"
+    },
+    "0067": {
+        "key": "agitation_motor_error",
+        "file": "error.json"
+    },
+    "0068": {
+        "key": "led_room1_error",
+        "file": "error.json"
+    },
+    "0069": {
+        "key": "led_room1_error",
+        "file": "error.json"
+    },
+    "006A": {
+        "key": "led_room2_error",
+        "file": "error.json"
+    },
+    "006B": {
+        "key": "led_room2_error",
+        "file": "error.json"
+    },
+    "006C": {
+        "key": "led_room3_error",
+        "file": "error.json"
+    },
+    "006D": {
+        "key": "led_room3_error",
+        "file": "error.json"
+    },
+    "006E": {
+        "key": "solvalve_room1_error",
+        "file": "error.json"
+    },
+    "006F": {
+        "key": "solvalve_room2_error",
+        "file": "error.json"
+    },
+    "0070": {
+        "key": "solvalve_room3_error",
+        "file": "error.json"
+    },
+    "0071": {
+        "key": "main_display_error",
+        "file": "error.json"
+    },
+    "0078": {
+        "key": "mixtank_low",
+        "file": "actuator.json"
+    },
+    "0079": {
+        "key": "mixtank_high",
+        "file": "actuator.json"
+    },
+    "007A": {
+        "key": "mixtank_limit",
+        "file": "actuator.json"
+    },
+    "007B": {
+        "key": "watertank_low",
+        "file": "actuator.json"
+    },
+    "007C": {
+        "key": "solutiontank_low",
+        "file": "actuator.json"
+    },
+    "007D": {
+        "key": "door",
+        "file": "actuator.json"
+    },
+    "007E": {
+        "key": "bed_room1",
+        "file": "actuator.json"
+    },
+    "007F": {
+        "key": "bed_low_room1",
+        "file": "actuator.json"
+    },
+    "0080": {
+        "key": "bed_room2",
+        "file": "actuator.json"
+    },
+    "0081": {
+        "key": "bed_low_room2",
+        "file": "actuator.json"
+    },
+    "0082": {
+        "key": "bed_room3",
+        "file": "actuator.json"
+    },
+    "0083": {
+        "key": "bed_low_room3",
+        "file": "actuator.json"
+    },
+    "0084": {
+        "key": "condensate_low",
+        "file": "actuator.json"
+    },
+    "0085": {
+        "key": "condensate_high",
+        "file": "actuator.json"
+    },
+    "008C": {
+        "key": "door_open_alarm",
+        "file": "alarm.json"
+    },
+    "008D": {
+        "key": "water_need_alarm",
+        "file": "alarm.json"
+    },
+    "008E": {
+        "key": "solution_need_alarm",
+        "file": "alarm.json"
+    },
+    "008F": {
+        "key": "bed_separatation_alarm_room1",
+        "file": "alarm.json"
+    },
+    "0090": {
+        "key": "thinning_alarm_room1",
+        "file": "alarm.json"
+    },
+    "0091": {
+        "key": "harvest_alarm_room1",
+        "file": "alarm.json"
+    },
+    "0092": {
+        "key": "replace_alarm_room1",
+        "file": "alarm.json"
+    },
+    "0093": {
+        "key": "bed_separatation_alarm_room2",
+        "file": "alarm.json"
+    },
+    "0094": {
+        "key": "thinning_alarm_room2",
+        "file": "alarm.json"
+    },
+    "0095": {
+        "key": "harvest_alarm_room2",
+        "file": "alarm.json"
+    },
+    "0096": {
+        "key": "change_alarm_room2",
+        "file": "alarm.json"
+    },
+    "0097": {
+        "key": "bed_separatation_alarm_room3",
+        "file": "alarm.json"
+    },
+    "0098": {
+        "key": "thinning_alarm_room3",
+        "file": "alarm.json"
+    },
+    "0099": {
+        "key": "harvest_alarm_room3",
+        "file": "alarm.json"
+    },
+    "009A": {
+        "key": "replace_alarm_room3",
+        "file": "alarm.json"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "temperatrue_outside": 0,
+    "temperature_room1": 0,
+    "temperature_room2": 0,
+    "temperature_room3": 0,
+    "temperature_eva_in": 0,
+    "mintank_water_temperature": 0,
+    "humidity_outside": 0,
+    "humidity_room1": 0,
+    "humidity_room2": 0,
+    "humidity_room3": 0,
+    "solution_flow": 0,
+    "mixtank_flow": 0,
+    "mixtank_ec": 0
+  }

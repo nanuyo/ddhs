@@ -4,7 +4,6 @@ import urllib.parse
 import json
 import os
 
-
 # 서버가 사용할 포트 번호와 장치 ID를 설정합니다.
 PORT = 8080
 DEVICE_ID = "daedongplanter_12412312315134"
@@ -51,7 +50,7 @@ network={{
 
 # 시스템을 재부팅하는 함수
 def reboot_system():
-    print("***************reboot**************")
+    print("System reboot command has been executed.")
     os.system('reboot')
 
 # HTTP 요청을 처리하는 클래스
@@ -132,8 +131,6 @@ class SimpleHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 save_registered_users()  # 사용자 정보를 파일에 저장
                 save_wifi_config(ssid, password)
                 self.respond(200, 'SUCCESS', {'deviceid': DEVICE_ID})
-
-                
                 reboot_system()
             except Exception as e:
                 self.respond(400, f'Internal Error: {str(e)}')

@@ -14,7 +14,7 @@ except Exception as e:
 def send_data(data):
     if ser.is_open:
         try:
-            data_with_delimiter = f"<DATA>{data}</DATA>\n"  # 데이터에 구분자 추가
+            data_with_delimiter = data + '\n'  # 데이터에 구분자('\n') 추가
             ser.write(data_with_delimiter.encode('utf-8'))  # 데이터 전송
             print(f"Data sent: {data}")
         except Exception as e:
@@ -39,13 +39,12 @@ def receive_data():
 
 def sender():
     while True:
-        data_to_send = bytes.fromhex("D140010086000117")
-        ser.write(data_to_send)
-        print(f"Data sent: {data_to_send.hex().upper()}")
-        time.sleep(10)
+        # "orange" 문자열을 계속 전송
+        data_to_send = "APPLE"
+        send_data(data_to_send)
+        time.sleep(1)  # 1초 간격으로 전송
 
 def receiver():
-    
     while True:
         # 데이터 수신
         received = receive_data()
@@ -57,15 +56,15 @@ def receiver():
 
 try:
     # 송신과 수신을 동시에 처리하기 위한 스레드 생성
-    sender_thread = threading.Thread(target=sender)
+    # sender_thread = threading.Thread(target=sender)
     receiver_thread = threading.Thread(target=receiver)
 
     # 두 스레드를 데몬 스레드로 설정하여 메인 프로그램 종료 시 함께 종료되도록 함
-    sender_thread.daemon = True
+    # sender_thread.daemon = True
     receiver_thread.daemon = True
 
     # 스레드 실행
-    sender_thread.start()
+    # sender_thread.start()
     receiver_thread.start()
 
     # 메인 스레드는 계속 실행되도록 유지

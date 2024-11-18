@@ -1,0 +1,330 @@
+{
+    "0000": {
+        "key": "auto_manual_mode",
+        "file": "setting.json"
+    },
+    "0046": {
+        "key": "current_time",
+        "file": "setting.json"
+    },
+    "0047": {
+        "key": "led_off_time",
+        "file": "room-setting.json"
+    },
+    "0048": {
+        "key": "fan_room1_a/m",
+        "file": "setting.json"
+    },
+    "0049": {
+        "key": "fan_room2_a/m",
+        "file": "setting.json"
+    },
+    "004A": {
+        "key": "fan_room3_a/m",
+        "file": "setting.json"
+    },
+    "004B": {
+        "key": "fan_exhaust_a/m",
+        "file": "setting.json"
+    },
+    "004C": {
+        "key": "mixmoter_a/m",
+        "file": "setting.json"
+    },
+    "004D": {
+        "key": "led_room1_a/m",
+        "file": "setting.json"
+    },
+    "004E": {
+        "key": "led_room2_a/m",
+        "file": "setting.json"
+    },
+    "004F": {
+        "key": "led_room3_a/m",
+        "file": "setting.json"
+    },
+    "0050": {
+        "key": "heater_room1_a/m",
+        "file": "setting.json"
+    },
+    "0051": {
+        "key": "heater_room2_a/m",
+        "file": "setting.json"
+    },
+    "0052": {
+        "key": "heater_room3_a/m",
+        "file": "setting.json"
+    },
+    "0053": {
+        "key": "heater_condensate_a/m",
+        "file": "setting.json"
+    },
+    "0001": {
+        "key": "auto_manual_mode1",
+        "file": "setting.json"
+    },
+    "005A": {
+        "key": "water_pump_a/m",
+        "file": "setting.json"
+    },
+    "005B": {
+        "key": "solution_pump_a/m",
+        "file": "setting.json"
+    },
+    "005C": {
+        "key": "mix_pump_a/m",
+        "file": "setting.json"
+    },
+    "005D": {
+        "key": "solvalve_room1_a/m",
+        "file": "setting.json"
+    },
+    "005E": {
+        "key": "solvalve_room2_a/m",
+        "file": "setting.json"
+    },
+    "005F": {
+        "key": "solvalve_room3_a/m",
+        "file": "setting.json"
+    },
+    "0060": {
+        "key": "water_auto_valve_a/m",
+        "file": "setting.json"
+    },
+    "0061": {
+        "key": "compressor_a/m",
+        "file": "setting.json"
+    },
+    "0002": {
+        "key": "current_time_hour",
+        "file": "time.json"
+    },
+    "0003": {
+        "key": "current_time_min",
+        "file": "time.json"
+    },
+    "0004": {
+        "key": "lgiht_off_time_hour",
+        "file": "room-setting.json"
+    },
+    "0005": {
+        "key": "light_off_time_min",
+        "file": "room-setting.json"
+    },
+    "0006": {
+        "key": "fan_control_room1",
+        "file": "setting.json"
+    },
+    "0007": {
+        "key": "fan_control_room2",
+        "file": "setting.json"
+    },
+    "0008": {
+        "key": "fan_control_room3",
+        "file": "setting.json"
+    },
+    "0009": {
+        "key": "fan_control_exhaust",
+        "file": "setting.json"
+    },
+    "000A": {
+        "key": "mixmotor_control",
+        "file": "setting.json"
+    },
+    "000B": {
+        "key": "led_control_room1",
+        "file": "setting.json"
+    },
+    "000C": {
+        "key": "led_control_room2",
+        "file": "setting.json"
+    },
+    "000D": {
+        "key": "led_control_room3",
+        "file": "setting.json"
+    },
+    "000E": {
+        "key": "heater_control_room1",
+        "file": "setting.json"
+    },
+    "000F": {
+        "key": "heater_control_room2",
+        "file": "setting.json"
+    },
+    "0010": {
+        "key": "heater_control_room3",
+        "file": "setting.json"
+    },
+    "0011": {
+        "key": "heater_control_condensate",
+        "file": "setting.json"
+    },
+    "0012": {
+        "key": "water_pump_control",
+        "file": "setting.json"
+    },
+    "0013": {
+        "key": "solution_pump_control",
+        "file": "setting.json"
+    },
+    "0014": {
+        "key": "mix_pump_control",
+        "file": "setting.json"
+    },
+    "0015": {
+        "key": "solvalve_control_room1",
+        "file": "setting.json"
+    },
+    "0016": {
+        "key": "solvalve_control_room2",
+        "file": "setting.json"
+    },
+    "0017": {
+        "key": "solvalve_control_room3",
+        "file": "setting.json"
+    },
+    "0018": {
+        "key": "water_auto_valve_control",
+        "file": "setting.json"
+    },
+    "0019": {
+        "key": "compressor_control",
+        "file": "setting.json"
+    },
+    "001A": {
+        "key": "room_no",
+        "file": "room-setting.json"
+    },
+    "001B": {
+        "key": "mode",
+        "file": "room-setting.json"
+    },
+    "001C": {
+        "key": "run_time_day",
+        "file": "room-setting.json"
+    },
+    "001D": {
+        "key": "thinning_date",
+        "file": "room-setting.json"
+    },
+    "001E": {
+        "key": "harvest_date",
+        "file": "room-setting.json"
+    },
+    "001F": {
+        "key": "replace_date",
+        "file": "room-setting.json"
+    },
+    "0020": {
+        "key": "growing_days_stage1",
+        "file": "room-setting.json"
+    },
+    "0021": {
+        "key": "temperature_set_day_stage1",
+        "file": "room-setting.json"
+    },
+    "0022": {
+        "key": "temperature_set_night_stage1",
+        "file": "room-setting.json"
+    },
+    "0023": {
+        "key": "lightintensity_set_stage1",
+        "file": "room-setting.json"
+    },
+    "0024": {
+        "key": "daylength_set_stage1",
+        "file": "room-setting.json"
+    },
+    "0025": {
+        "key": "windspeed_set_stage1",
+        "file": "room-setting.json"
+    },
+    "0026": {
+        "key": "ec_stage1",
+        "file": "room-setting.json"
+    },
+    "0027": {
+        "key": "growing_days_stage2",
+        "file": "room-setting.json"
+    },
+    "0028": {
+        "key": "temperature_set_day_stage2",
+        "file": "room-setting.json"
+    },
+    "0029": {
+        "key": "temperature_set_night_stage2",
+        "file": "room-setting.json"
+    },
+    "002A": {
+        "key": "lightintensity_set_stage2",
+        "file": "room-setting.json"
+    },
+    "002B": {
+        "key": "daylength_set_stage2",
+        "file": "room-setting.json"
+    },
+    "002C": {
+        "key": "windspeed_set_stage2",
+        "file": "room-setting.json"
+    },
+    "002D": {
+        "key": "ec_stage2",
+        "file": "room-setting.json"
+    },
+    "002E": {
+        "key": "growing_days_stage3",
+        "file": "room-setting.json"
+    },
+    "002F": {
+        "key": "temperature_set_day_stage3",
+        "file": "room-setting.json"
+    },
+    "0030": {
+        "key": "temperature_set_night_stage3",
+        "file": "room-setting.json"
+    },
+    "0031": {
+        "key": "lightintensity_set_stage3",
+        "file": "room-setting.json"
+    },
+    "0032": {
+        "key": "daylength_set_stage3",
+        "file": "room-setting.json"
+    },
+    "0033": {
+        "key": "windspeed_set_stage3",
+        "file": "room-setting.json"
+    },
+    "0034": {
+        "key": "ec_stage3",
+        "file": "room-setting.json"
+    },
+    "0035": {
+        "key": "growing_days_stage4",
+        "file": "room-setting.json"
+    },
+    "0036": {
+        "key": "temperature_set_day_stage4",
+        "file": "room-setting.json"
+    },
+    "0037": {
+        "key": "temperature_set_night_stage4",
+        "file": "room-setting.json"
+    },
+    "0038": {
+        "key": "lightintensity_set_stage4",
+        "file": "room-setting.json"
+    },
+    "0039": {
+        "key": "daylength_set_stage4",
+        "file": "room-setting.json"
+    },
+    "003A": {
+        "key": "windspeed_set_stage4",
+        "file": "room-setting.json"
+    },
+    "003B": {
+        "key": "ec_stage4",
+        "file": "room-setting.json"
+    }
+}

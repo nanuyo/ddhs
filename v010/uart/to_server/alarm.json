@@ -1,0 +1,17 @@
+{
+    "door_open_alarm": 0, 
+    "water_need_alarm": 0, 
+    "solution_need_alarm": 0, 
+    "bed_separatation_alarm_room1": 0, 
+    "thinning_alarm_room1": 0, 
+    "harvest_alarm_room1": 0, 
+    "replace_alarm_room1": 0, 
+    "bed_separatation_alarm_room2": 0, 
+    "thinning_alarm_room2": 0, 
+    "harvest_alarm_room2": 0, 
+    "replace_alarm_room2": 0, 
+    "bed_separatation_alarm_room3": 0, 
+    "thinning_alarm_room3": 0, 
+    "harvest_alarm_room3": 0, 
+    "replace_alarm_room3": 0 
+  }

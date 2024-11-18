@@ -1,0 +1,7 @@
+{
+"fan_room1_a/m":1,
+"fan_room2_a/m":1,
+"fan_room3_a/m":1,
+"fan_exhaust_a/m":1,
+"mixmotor_a/m":1,"led_room1_a/m":1,"led_room2_a/m":1,"led_room3_a/m":1,"heater_room1_a/m":1,"heater_room2_a/m":1,"heater_room3_a/m":1,"heater_condensate_a/m":1,"water_pump_a/m":1,"solution_pump_a/m":1,"mix_pump_a/m":1,"solvalve_room1_a/m":1,"solvalve_room2_a/m":1,"solvalve_room3_a/m":1,"water_auto_valve_a/m":1,"compressor_a/m":1,"fan_control_room1":1500,"fan_control_room2":1800,"fan_control_room3":1200,"fan_control_exhaust":1,"led_control_room1":90,"led_control_room2":75,"led_control_room3":80,"compressor_control":1600,"mixmotor_control":0,"heater_control_room1":1,"heater_control_room2":0,"heater_control_room3":1,"heater_control_condensate":0,"water_pump_control":1,"solution_pump_control":0,"mix_pump_control":1,"solvalve_control_room1":0,"solvalve_control_room2":1,"solvalve_control_room3":0,"water_auto_valve_control":1
+}

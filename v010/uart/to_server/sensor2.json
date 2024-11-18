@@ -1,0 +1,9 @@
+{
+    "fan_rpm_room1": 0,
+    "fan_rpm_room2": 0,
+    "fan_rpm_room3": 0,
+    "compressor_rpm": 0,
+    "led_duty_room1": 0,
+    "led_duty_room2": 0,
+    "led_duty_room3": 0
+  }
